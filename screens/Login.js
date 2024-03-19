@@ -48,7 +48,7 @@ const Login = () => {
       <Text style={styles.TxTHeader}>Connexion</Text>
       </View>
       <View style={styles.inputContainer}>
-        <Text style={styles.TxtInput}>Email</Text>
+        <Text style={styles.TxtInput}>Adresse email</Text>
         <TextInput
           value={email}
           onChangeText={text => setEmail(text)}
@@ -56,7 +56,7 @@ const Login = () => {
         />
       </View>
       <View style={styles.inputContainer}>
-        <Text style={styles.TxtInput}>Password</Text>
+        <Text style={styles.TxtInput}>Mot de passe</Text>
         <TextInput
           value={password}
           onChangeText={text => setPassword(text)}
