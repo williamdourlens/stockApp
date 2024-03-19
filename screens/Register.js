@@ -45,7 +45,7 @@ const Login = () => {
       behavior="padding"
     >
       <View style={styles.Header}>
-      <Text style={styles.TxTHeader}>Connexion</Text>
+      <Text style={styles.TxTHeader}>Register</Text>
       </View>
       <View style={styles.inputContainer}>
         <Text style={styles.TxtInput}>Email</Text>
@@ -70,19 +70,20 @@ const Login = () => {
           onPress={handleLogin}
           style={styles.button}
         >
-          <Text style={styles.ValideLogin}>Se Connecter</Text>
+          <Text style={styles.ValideLogin}>S'inscrire</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.Register}>
         <TouchableOpacity
-          onPress={() => navigation.navigate('Register')}
+          onPress={() => navigation.navigate('Login')}
           style={[ styles.Register]}
         >
-        <Text style={styles.buttonOutlineText}>Pas de compte?</Text>
-        <Text style={styles.buttonOutlineText}>S'inscrire ici !</Text>
+        <Text style={styles.buttonOutlineText}>Deja un compte?</Text>
+        <Text style={styles.buttonOutlineText}>Cliquez ici !</Text>
  
         </TouchableOpacity>
       </View>
+
     </KeyboardAvoidingView>
   )
 }
