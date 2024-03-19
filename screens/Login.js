@@ -44,15 +44,20 @@ const Login = () => {
       style={styles.container}
       behavior="padding"
     >
+      <View style={styles.Header}>
+      <Text style={styles.TxTHeader}>Connexion</Text>
+      </View>
       <View style={styles.inputContainer}>
+        <Text style={styles.TxtInput}>Email</Text>
         <TextInput
-          placeholder="Email"
           value={email}
           onChangeText={text => setEmail(text)}
           style={styles.input}
         />
+      </View>
+      <View style={styles.inputContainer}>
+        <Text style={styles.TxtInput}>Password</Text>
         <TextInput
-          placeholder="Password"
           value={password}
           onChangeText={text => setPassword(text)}
           style={styles.input}
@@ -60,18 +65,21 @@ const Login = () => {
         />
       </View>
 
-      <View style={styles.buttonContainer}>
+      <View >
         <TouchableOpacity
           onPress={handleLogin}
           style={styles.button}
         >
-          <Text style={styles.buttonText}>Login</Text>
+          <Text style={styles.ValideLogin}>Se Connecter</Text>
         </TouchableOpacity>
+      </View>
+      <View style={styles.Register}>
         <TouchableOpacity
           onPress={handleSignUp}
-          style={[styles.button, styles.buttonOutline]}
+          style={[ styles.Register]}
         >
-          <Text style={styles.buttonOutlineText}>Register</Text>
+        <Text style={styles.buttonOutlineText}>Pas de compte?</Text>
+        <Text style={styles.buttonOutlineText}>Se créer un compte</Text>
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
@@ -85,44 +93,70 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#1E1E1E',
+    
   },
+  Header: {
+    width: '80%',
+    marginBottom: 30,
+    padding: 10,
+    backgroundColor: '#ECAB03',
+    borderRadius: 20,
+  },
+  TxTHeader: {
+    fontSize: 40,
+    fontWeight: 'bold',
+    color: 'white',
+    textAlign: 'center',
+  },
+
   inputContainer: {
-    width: '80%'
+    width: '80%',
+    backgroundColor: '#ECAB03',
+    padding: 20,
+    marginTop: 20,
+    borderRadius: 20,
   },
+  TxtInput: {
+    textAlign: 'center',
+    fontSize: 20,
+    color: 'white',
+    marginTop: 5,
+  },
+
   input: {
     backgroundColor: 'white',
     paddingHorizontal: 15,
-    paddingVertical: 10,
+    paddingBottom: 10,
     borderRadius: 10,
     marginTop: 5,
+    borderWidth: 3,
+    borderColor: 'black',
+    
   },
-  buttonContainer: {
-    width: '60%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 40,
-  },
+
   button: {
-    backgroundColor: '#0782F9',
-    width: '100%',
-    padding: 15,
-    borderRadius: 10,
-    alignItems: 'center',
+    width: '80%',
+    marginVertical: 10,
+    padding: 10,
+    borderRadius: 20,
+    backgroundColor: '#ECAB03',
   },
-  buttonOutline: {
-    backgroundColor: 'white',
-    marginTop: 5,
-    borderColor: '#0782F9',
-    borderWidth: 2,
-  },
-  buttonText: {
+  ValideLogin: {
+    fontSize: 20,
+    fontWeight: 'bold',
     color: 'white',
-    fontWeight: '700',
-    fontSize: 16,
+    
+    textAlign: 'center',
+    backgroundColor: '#ECAB03',    
   },
   buttonOutlineText: {
-    color: '#0782F9',
-    fontWeight: '700',
-    fontSize: 16,
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 15,
+  },
+  Register: {
+    padding: 5,
+    borderRadius: 20,
   },
 })
