@@ -1,0 +1,49 @@
+{
+    "categories": [
+      {
+        "id_categorie": 1,
+        "nom": "Placeholder"
+      }
+    ],
+    "plats": [
+      {
+        "reference": 1,
+        "nom": "Placeholder",
+        "prix": 10.50,
+        "image": "Placeholder",
+        "description": "Placeholder",
+        "quantite": 0,
+        "valeur_energetique": 0,
+        "matieres_grasses": 0,
+        "glucides": 0,
+        "proteines": 0,
+        "sel": 0,
+        "id_categorie": 1
+      }
+    ],
+    "fournisseurs": [
+      {
+        "id_fournisseur": 1,
+        "nom": "Placeholder",
+        "adresse": "Placeholder",
+        "telephone": "Placeholder",
+        "email": "Placeholder"
+      }
+    ],
+    "ingredients": [
+      {
+        "id_ingredient": 1,
+        "nom": "Placeholder",
+        "quantite": 0,
+        "isAllergenes": false,
+        "id_fournisseur": 1
+      }
+    ],
+    "compositionPlats": [
+      {
+        "id_plat": 1,
+        "id_ingredient": 1
+      }
+    ]
+}
+  
