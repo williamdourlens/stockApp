@@ -2,47 +2,119 @@
     "categories": [
       {
         "id_categorie": 1,
-        "nom": "Placeholder"
+        "nom": "Mexicain"
+      },
+      {
+        "id_categorie": 2,
+        "nom": "Américain"
+      },
+      {
+        "id_categorie": 3,
+        "nom": "Français"
       }
     ],
     "plats": [
       {
         "reference": 1,
-        "nom": "Placeholder",
+        "nom": "Nachos",
         "prix": 10.50,
         "image": "Placeholder",
-        "description": "Placeholder",
-        "quantite": 0,
-        "valeur_energetique": 0,
-        "matieres_grasses": 0,
-        "glucides": 0,
-        "proteines": 0,
-        "sel": 0,
+        "description": "Nachos servis avec du fromage fondu, des olives, des piments, de la crème aigre et une sauce tomate.",
+        "quantite": 5,
+        "valeur_energetique": 38.48,
+        "matieres_grasses": 21.5,
+        "glucides": 30.2,
+        "proteines": 12.9,
+        "sel": 0.5,
         "id_categorie": 1
+      },
+      {
+        "reference": 2,
+        "nom": "Cheeseburger",
+        "prix": 14.75,
+        "image": "Placeholder",
+        "description": "Hamburger composé d'un steak, de cheddar, de salade, de tomate, de cornichons et de sauce.",
+        "quantite": 3,
+        "valeur_energetique": 100.5,
+        "matieres_grasses": 54.5,
+        "glucides": 23.2,
+        "proteines": 10.9,
+        "sel": 2.5,
+        "id_categorie": 2
+      },
+      {
+        "reference": 3,
+        "nom": "Escargots",
+        "prix": 12.25,
+        "image": "Placeholder",
+        "description": "Escargots grillés dans leur coquille, au sel, poivre et herbes.",
+        "quantite": 1,
+        "valeur_energetique": 236.5,
+        "matieres_grasses": 85.5,
+        "glucides": 10.2,
+        "proteines": 16.9,
+        "sel": 74.5,
+        "id_categorie": 3
       }
     ],
     "fournisseurs": [
       {
         "id_fournisseur": 1,
-        "nom": "Placeholder",
-        "adresse": "Placeholder",
-        "telephone": "Placeholder",
-        "email": "Placeholder"
+        "nom": "Philibert & Fils",
+        "adresse": "89 rue de la République, 69002 Lyon",
+        "telephone": "06 12 34 56 78",
+        "email": "philibert&fils@gmail.com"
+      },
+      {
+        "id_fournisseur": 2,
+        "nom": "Ingredient & Co",
+        "adresse": "12 rue du Pain perdu, 24300 Nontron",
+        "telephone": "07 89 12 34 56",
+        "email": "ingredient&co@hotmail.fr"
+      },
+      {
+        "id_fournisseur": 3,
+        "nom": "Fournisseur de la Vallée",
+        "adresse": "5 rue de la Vallée, 75001 Paris",
+        "telephone": "06 78 23 45 67",
+        "email": "four_vallée@gmail.com"
       }
     ],
     "ingredients": [
       {
         "id_ingredient": 1,
-        "nom": "Placeholder",
-        "quantite": 0,
-        "isAllergenes": false,
+        "nom": "Salade",
+        "quantite": 42,
+        "isAllergenes": true,
         "id_fournisseur": 1
+      },
+      {
+        "id_ingredient": 2,
+        "nom": "Fromage",
+        "quantite": 10,
+        "isAllergenes": false,
+        "id_fournisseur": 2
+      },
+      {
+        "id_ingredient": 3,
+        "nom": "Herbe",
+        "quantite": 5,
+        "isAllergenes": false,
+        "id_fournisseur": 3
       }
     ],
     "compositionPlats": [
       {
         "id_plat": 1,
+        "id_ingredient": 2
+      },
+      {
+        "id_plat": 2,
         "id_ingredient": 1
+      },
+      {
+        "id_plat": 3,
+        "id_ingredient": 3
       }
     ]
 }
