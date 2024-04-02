@@ -16,8 +16,8 @@ const Plats = () => {
         data.map((item) => (
           <View style={styles.div} key={item.id_categorie}>
             <Text style={styles.nameplat}>{item.nom}</Text> 
-            <Text style={styles.infoplat}>{item.quantite}</Text> 
-            <Text style={styles.infoplat}>{item.prix}</Text> 
+            <Text style={[styles.infoplat, styles.quantite]} >{item.quantite}</Text> 
+            <Text style={[styles.infoplat, styles.prix]}>{item.prix}</Text> 
 
   
             <TouchableOpacity style={styles.button}>
@@ -74,25 +74,30 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     textAlign: 'center',
     justifyContent: 'center',
-    marginRight: 10,
+    marginRight: 5,
   },
   infoplat: {
     color: '#1E1E1E',
     backgroundColor: '#ECAB03',
-    width: 40,
     height: 40,
     fontSize: 20,
     paddingTop: 5,
     textAlign: 'center',
     justifyContent: 'center',
-    marginRight: 10,
+    marginRight: 5,
+  },
+  quantite: {
+    width: 30,
+  },
+  prix: {
+    width: 50,
   },
   button: {
     backgroundColor: '#ECAB03',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
-    marginHorizontal: 10,
+    marginHorizontal: 5,
   },
   buttonText: {
     color: '#1E1E1E',

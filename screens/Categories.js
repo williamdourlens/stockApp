@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   },
   div: {
     flexDirection: 'row',
-    marginLeft: 20,
+    marginLeft: 15,
     marginBottom: 20,
   },
   namecateg: {
@@ -71,14 +71,14 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     textAlign: 'center',
     justifyContent: 'center',
-    marginRight: 10,
+    marginRight: 5,
   },
   button: {
     backgroundColor: '#ECAB03',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
-    marginHorizontal: 10,
+    marginHorizontal: 5,
   },
   buttonText: {
     color: '#1E1E1E',
