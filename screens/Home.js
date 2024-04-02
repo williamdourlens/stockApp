@@ -1,45 +1,36 @@
-import React, { useEffect, useState } from 'react';
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
-import { StyleSheet, Text, View } from 'react-native';
+import { useNavigation } from '@react-navigation/core'
+import React, { useEffect, useState } from 'react'
+import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 
-
-const db = getFirestore();
-
-export default function Home() {
-  const [RepasData, setRepasData] = useState([]);
-
-  useEffect(() => {
-    async function fetchRepas() {
-      try {
-        const querySnapshot = await getDocs(collection(db, 'Repas'));
-        const repasArray = [];
-
-        querySnapshot.forEach((documentSnapshot) => {
-          repasArray.push({
-            id: documentSnapshot.id,
-            data: documentSnapshot.data(),
-          });
-        });
-
-        setRepasData(repasArray);
-      } catch (error) {
-        console.error('Error fetching repas: ', error);
-      }
-    }
-
-    fetchRepas();
-  }, []);
-
+export default function Home({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text>STOCKAGE DES REPAS ACCES RESTREINT</Text>
-      {RepasData.map((Repas) => (
-        <View key={Repas.id}>
+      <Text style={styles.Title}>Bienvenu sur</Text>
+      <Text style={styles.Title}>l'application</Text>
+      <Text style={styles.textt}>de gestion de la societe</Text>
+      <Text style={styles.Name}>FNM</Text>
+      
+      <Text style={styles.textt}>Que voulez vous faire?</Text>
+      
 
-          <Text>{`Nom : ${Repas.data.nom}`}</Text>
-          <Text>{`Nombre : ${Repas.data.quantite}`}</Text>
-        </View>
-      ))}
+      <TouchableOpacity
+          onPress={() => navigation.navigate('Categories')}
+          style={[ styles.button]}
+        >
+          <Text style={styles.touch}>Liste des Categories</Text>
+        </TouchableOpacity>
+      <TouchableOpacity
+          onPress={() => navigation.navigate('Plats')}
+          style={[ styles.button]}
+        >
+          <Text style={styles.touch}>Liste des Plats</Text>
+        </TouchableOpacity>
+      <TouchableOpacity
+          onPress={() => navigation.navigate('Ingredient')}
+          style={[ styles.button]}
+        >
+          <Text style={styles.touch}>Liste des Ingredients</Text>
+        </TouchableOpacity>
     </View>
   );
 }
@@ -47,8 +38,35 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#1E1E1E',
+  },
+  Title: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: '#ECAB03',
+  },
+  textt: {
+    fontSize: 20,
+    marginTop: 50,
+    color: '#ECAB03',
+  },
+  Name: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#ECAB03',
+  },
+  touch: {
+    fontSize: 20,
+    color: 'black',
+  },
+  button: {
+    width: '60%',
+    backgroundColor: '#ECAB03',
+    padding: 15,
+    marginTop: 20,
+    borderRadius: 20,
+    alignItems: 'center',
   },
 });

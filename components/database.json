@@ -11,6 +11,14 @@
       {
         "id_categorie": 3,
         "nom": "Français"
+      },
+      {
+        "id_categorie": 4,
+        "nom": "Italien"
+      },
+      {
+        "id_categorie": 5,
+        "nom": "Chinois"
       }
     ],
     "plats": [
@@ -101,6 +109,20 @@
         "quantite": 5,
         "isAllergenes": false,
         "id_fournisseur": 3
+      },
+      {
+        "id_ingredient": 4,
+        "nom": "Piment",
+        "quantite": 3,
+        "isAllergenes": true,
+        "id_fournisseur": 1
+      },
+      {
+        "id_ingredient": 5,
+        "nom": "Tomate",
+        "quantite": 12,
+        "isAllergenes": false,
+        "id_fournisseur": 2
       }
     ],
     "compositionPlats": [
