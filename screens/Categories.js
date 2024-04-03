@@ -11,7 +11,7 @@ const Categories = () => {
   
   return (
     <View style={styles.container}>
-      <Text style={styles.Title}>Les categories existantes</Text>
+      <Text style={styles.Title}>Liste des Catégories</Text>
       {data ? (
         data.map((item) => (
           <View style={styles.div} key={item.id_categorie}>
@@ -27,7 +27,7 @@ const Categories = () => {
           </View>
         ))
       ) : null}
-      <Text style={styles.Title}>Ajouter une nouvelle categorie</Text>
+      <Text style={styles.Title}>Ajouter une catégorie</Text>
       <View style={styles.div}>
         <TextInput
           style={styles.newcateg}

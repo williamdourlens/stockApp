@@ -11,7 +11,7 @@ const Plats = () => {
   
   return (
     <View style={styles.container}>
-      <Text style={styles.Title}>Les plats existants</Text>
+      <Text style={styles.Title}>Liste des Plats</Text>
       {data ? (
         data.map((item) => (
           <View style={styles.div} key={item.id_categorie}>
@@ -30,7 +30,7 @@ const Plats = () => {
           </View>
         ))
       ) : null}
-      <Text style={styles.Title}>Ajouter un nouveau plat</Text>
+      <Text style={styles.Title}>Ajouter un plat</Text>
       <View style={styles.div}>
         <TextInput
           style={styles.newcateg}

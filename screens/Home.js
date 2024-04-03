@@ -5,12 +5,12 @@ import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, Vi
 export default function Home({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.Title}>Bienvenu sur</Text>
+      <Text style={styles.Title}>Bienvenue sur</Text>
       <Text style={styles.Title}>l'application</Text>
-      <Text style={styles.textt}>de gestion de la societe</Text>
-      <Text style={styles.Name}>FNM</Text>
+      <Text style={styles.Title}>de gestion des stocks</Text>
+      <Text style={styles.Title}>FNM</Text>
       
-      <Text style={styles.textt}>Que voulez vous faire?</Text>
+      <Text style={styles.textt}>Accéder à</Text>
       
 
       <TouchableOpacity

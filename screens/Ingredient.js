@@ -11,7 +11,7 @@ const Plats = () => {
   
   return (
     <View style={styles.container}>
-      <Text style={styles.Title}>Les plats existants</Text>
+      <Text style={styles.Title}>Liste des Ingredients</Text>
       {data ? (
         data.map((item) => (
           <View style={styles.div} key={item.id_categorie}>
@@ -38,7 +38,7 @@ const Plats = () => {
         <Text></Text>
         <TextInput
           style={styles.newcateg}
-          placeholder="quantité"
+          placeholder="Quantité"
         />
         <TouchableOpacity style={styles.button2}>
           <Text style={styles.buttonText2}>Ajouter</Text>

@@ -78,7 +78,7 @@ const Login = () => {
           onPress={() => navigation.navigate('Login')}
           style={[ styles.Register]}
         >
-        <Text style={styles.buttonOutlineText}>Deja un compte?</Text>
+        <Text style={styles.buttonOutlineText}>Déjà un compte?</Text>
         <Text style={styles.buttonOutlineText}>Cliquez ici !</Text>
  
         </TouchableOpacity>
