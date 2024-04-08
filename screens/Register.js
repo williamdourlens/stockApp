@@ -67,7 +67,7 @@ const Login = () => {
 
       <View >
         <TouchableOpacity
-          onPress={handleLogin}
+          onPress={handleSignUp}
           style={styles.button}
         >
           <Text style={styles.ValideLogin}>S'inscrire</Text>
