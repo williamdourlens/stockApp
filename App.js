@@ -8,6 +8,8 @@ import Register from './screens/Register';
 import Categories from './screens/Categories';
 import Plats from './screens/Plats';
 import Ingredient from './screens/Ingredient';
+import IngredientCreation from './screens/IngredientCreation';
+import CategorieCreation from './screens/CategorieCreation';
 
 
 const Stack = createNativeStackNavigator();
@@ -22,6 +24,8 @@ export default function App() {
         <Stack.Screen name="Categories" component={Categories} />
         <Stack.Screen name="Plats" component={Plats} />
         <Stack.Screen name="Ingredient" component={Ingredient} />
+        <Stack.Screen name="IngredientCreation" component={IngredientCreation} />
+        <Stack.Screen name="CategorieCreation" component={CategorieCreation} />
       </Stack.Navigator>
     </NavigationContainer>
   );

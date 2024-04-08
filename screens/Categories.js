@@ -1,8 +1,9 @@
+import { useNavigation } from '@react-navigation/core'
 import React, { useState, useEffect } from 'react';
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import jsonData from '../components/database.json'
 
-const Categories = () => {
+const Categories = ({ navigation }) => {
   const [data, getData] = useState(null);
 
   useEffect(() => {
@@ -27,16 +28,9 @@ const Categories = () => {
           </View>
         ))
       ) : null}
-      <Text style={styles.Title}>Ajouter une catégorie</Text>
-      <View style={styles.div}>
-        <TextInput
-          style={styles.newcateg}
-          placeholder="Nom de la categorie"
-        />
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Ajouter</Text>
-        </TouchableOpacity>
-        </View>
+		<View style={styles.div}>
+        	<TouchableOpacity style={styles.button} onPress={() => navigation.navigate('CategorieCreation')}><Text style={styles.buttonText}>Ajouter une catégorie</Text></TouchableOpacity>
+      	</View>
     </View>
 
   );

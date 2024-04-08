@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useNavigation } from '@react-navigation/core'
+import React, { useState, useEffect } from 'react'
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import jsonData from '../components/database.json'
 
-const Plats = () => {
+const Plats = ({ navigation }) => {
   const [data, getData] = useState(null);
 
   useEffect(() => {
@@ -29,21 +30,10 @@ const Plats = () => {
           </View>
         ))
       ) : null}
-      <Text style={styles.Title}>Ajouter un ingredient</Text>
-      <View style={styles.div2}>
-        <TextInput
-          style={styles.newcateg}
-          placeholder="Nom de l'ingredient"
-        />
-        <Text></Text>
-        <TextInput
-          style={styles.newcateg}
-          placeholder="Quantité"
-        />
-        <TouchableOpacity style={styles.button2}>
-          <Text style={styles.buttonText2}>Ajouter</Text>
-        </TouchableOpacity>
-        </View>
+      
+      <View style={styles.div}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('IngredientCreation')}><Text style={styles.buttonText}>Ajouter un ingrédient</Text></TouchableOpacity>
+      </View>
     </View>
 
   );
