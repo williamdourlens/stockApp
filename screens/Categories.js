@@ -28,8 +28,8 @@ const Categories = ({ navigation }) => {
           </View>
         ))
       ) : null}
-		<View style={styles.div}>
-        	<TouchableOpacity style={styles.button} onPress={() => navigation.navigate('CategorieCreation')}><Text style={styles.buttonText}>Ajouter une catégorie</Text></TouchableOpacity>
+		<View>
+        	<TouchableOpacity style={styles.button2} onPress={() => navigation.navigate('CategorieCreation')}><Text style={styles.buttonText}>Ajouter une catégorie</Text></TouchableOpacity>
       	</View>
     </View>
 
@@ -76,6 +76,16 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#1E1E1E',
+  },
+  
+  button2: {
+    backgroundColor: '#ECAB03',
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    borderRadius: 5,
+    marginHorizontal: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   newcateg: {
     color: 'black',

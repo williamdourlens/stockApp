@@ -3,27 +3,23 @@ import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, Vi
 import jsonData from '../components/database.json'
 import ModalDropdown from 'react-native-modal-dropdown';
 
-const CategorieCreation = () => {
+const PlatsIngredients = () => {
     const [data, getData] = useState(null);
 
     useEffect(() => {
-        getData(jsonData['categories']);
+        getData(jsonData['compositionPlats']);
+    }, []);
+    useEffect(() => {
+        getData(jsonData['ingredients']);
     }, []);
 
+    const [selectedCategory, setSelectedCategory] = useState(null);
     return (
         <View style={styles.container}>
-            <Text style={styles.Title}>Ajouter une catégorie</Text>
-            <View style={styles.div}>
-                <TextInput
-                    style={styles.newcateg}
-                    placeholder="Nom de la categorie"
-                />
-            </View>
-            <TouchableOpacity style={styles.button2}
-            //</View>onPress={handleAddCategory}
-            >
-                <Text style={styles.buttonText2}>Ajouter</Text>
-            </TouchableOpacity>
+            <Text style={styles.Title}>Ajouter les ingrédients au plat</Text>
+
+
+            
         </View>
     );
 }
@@ -43,23 +39,21 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginBottom: 20,
     },
-    button: {
-      backgroundColor: '#ECAB03',
-      paddingVertical: 10,
-      paddingHorizontal: 10,
-      borderRadius: 5,
-      marginHorizontal: 50,
-      alignItems: 'center',
-      justifyContent: 'center',
+    div: {
+        flexDirection: 'row',
+        marginLeft: 15,
+        marginBottom: 20,
+    },
+    div2: {
+        alignItems: 'center',
+        marginBottom: 20,
     },
     button2: {
         backgroundColor: '#ECAB03',
-        alignItems: 'center',
-        justifyContent: 'center',
         paddingVertical: 20,
         paddingHorizontal: 50,
         borderRadius: 5,
-        marginHorizontal: 50,
+        marginVertical: 15,
     },
     buttonText2: {
         color: '#1E1E1E',
@@ -74,11 +68,11 @@ const styles = StyleSheet.create({
         paddingTop: 5,
         textAlign: 'center',
         justifyContent: 'center',
+        marginRight: 10,
         marginVertical: 10,
-        marginHorizontal: 65,
         borderRadius: 5,
     },
 
 });
 
-export default CategorieCreation;
+export default PlatsIngredients;

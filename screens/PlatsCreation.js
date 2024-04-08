@@ -3,50 +3,44 @@ import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, Vi
 import jsonData from '../components/database.json'
 import ModalDropdown from 'react-native-modal-dropdown';
 
-const IngredientCreation = () => {
+const PlatsCreation = ({ navigation }) => {
   const [data, getData] = useState(null);
 
   useEffect(() => {
-    getData(jsonData['fournisseurs']);
+    getData(jsonData['categories']);
   }, []);
   
-const [isAllergen, setIsAllergen] = useState(false);
-
-const handleToggleAllergen = () => {
-    setIsAllergen(!isAllergen);
-};
 const [selectedCategory, setSelectedCategory] = useState(null);
 return (
 	<View style={styles.container}>
-		<Text style={styles.Title}>Ajouter un ingrédient</Text>
+		<Text style={styles.Title}>Ajouter un plat</Text>
 		
 		<View style={styles.div2}>
 			<TextInput
 				style={styles.newcateg}
-				placeholder="Nom de l'ingredient"
+				placeholder="Nom du plat"
 			/>
 			<TextInput
 				style={styles.newcateg}
-				placeholder="Quantité"
+				placeholder="Prix"
 				keyboardType="numeric"
 			/>
-			<TouchableOpacity
-				style={[styles.newcateg, { backgroundColor: isAllergen ? '#ECAB03' : '#ECAB03' }]}
-				onPress={handleToggleAllergen}
-			>
-				<Text style={styles.buttonText}>{isAllergen ? 'Allergène ✅' : 'Allergène ❌'}</Text>
-			</TouchableOpacity>
+            <TextInput
+				style={styles.newcateg}
+				placeholder="Description"
+			/>
 			<ModalDropdown
 				options={data ? [...data.map(category => category.nom)] : ['Chargement des données...']}
 				onSelect={(value) => setSelectedCategory(value === 'Sélectionnez un fournisseur' ? '' : value)}
 				defaultValue="Sélectionnez un fournisseur"
 				style={styles.selectCategory}
 			/>
-			<TouchableOpacity style={styles.button2}
-				//</View>onPress={handleAddIngredient}
-			>
-				<Text style={styles.buttonText2}>Ajouter</Text>
-			</TouchableOpacity>
+
+            {/* de base tous les ingrédients sont false */}
+		</View>
+
+        <View>
+			<TouchableOpacity style={styles.button} onPress={() => navigation.navigate('PlatsIngredients')}><Text style={styles.buttonText}>Mettre les ingrédients dans le plat</Text></TouchableOpacity>
 		</View>
 	</View>
 );
@@ -76,39 +70,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 20,
   },
-  nameplat: {
-    color: '#1E1E1E',
-    backgroundColor: '#ECAB03',
-    width: 150,
-    height: 40,
-    fontSize: 20,
-    paddingTop: 5,
-    textAlign: 'center',
-    justifyContent: 'center',
-    marginRight: 10,
-  },
-  infoplat: {
-    color: '#1E1E1E',
-    backgroundColor: '#ECAB03',
-    width: 40,
-    height: 40,
-    fontSize: 20,
-    paddingTop: 5,
-    textAlign: 'center',
-    justifyContent: 'center',
-    marginRight: 5,
-  },
   button: {
     backgroundColor: '#ECAB03',
     paddingVertical: 10,
     paddingHorizontal: 10,
     borderRadius: 5,
-    marginHorizontal: 5,
-  },
-  buttonText: {
-    color: '#1E1E1E',
-    fontSize:10,
-    textAlign: 'center',
+    marginHorizontal: 50,
+    alignItems: 'center',
     justifyContent: 'center',
   },
   button2: {
@@ -135,20 +103,7 @@ const styles = StyleSheet.create({
 	marginVertical: 10,
     borderRadius: 5,
   },
-  selectCategory: {
-	color: 'red',
-	backgroundColor: '#ECAB03',
-	width: 230,
-	height: 40,
-	fontSize: 20,
-	paddingTop: 5,
-	textAlign: 'center',
-	justifyContent: 'center',
-	marginRight: 10,
-	marginVertical: 10,
-	borderRadius: 5,
-  },
 
 });
 
-export default IngredientCreation;
+export default PlatsCreation;
