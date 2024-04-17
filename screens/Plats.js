@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView } from 'react-native'
 import jsonData from '../components/database.json'
 
 const Plats = ({ navigation }) => {
@@ -10,7 +10,7 @@ const Plats = ({ navigation }) => {
 	}, []);
 
 	return (
-		<View style={styles.container}>
+		<ScrollView style={styles.container}>
 			<Text style={styles.Title}>Liste des Plats</Text>
 			{data ? (
 				data.map((item) => (
@@ -33,7 +33,7 @@ const Plats = ({ navigation }) => {
 			<View>
 				<TouchableOpacity style={styles.button2} onPress={() => navigation.navigate('PlatsCreation')}><Text style={styles.buttonText}>Ajouter un plat</Text></TouchableOpacity>
 			</View>
-		</View>
+		</ScrollView>
 
 	);
 }

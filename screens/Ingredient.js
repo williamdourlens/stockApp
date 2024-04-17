@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/core'
 import React, { useState, useEffect } from 'react'
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView } from 'react-native'
 import jsonData from '../components/database.json'
 
 const Plats = ({ navigation }) => {
@@ -11,8 +11,8 @@ const Plats = ({ navigation }) => {
   }, []);
   
   return (
-    <View style={styles.container}>
-      <Text style={styles.Title}>Liste des Ingredients</Text>
+    <ScrollView style={styles.container}>
+      <Text style={styles.Title}>Liste des Ingrédients</Text>
       {data ? (
         data.map((item) => (
           <View style={styles.div} key={item.id_categorie}>
@@ -34,7 +34,7 @@ const Plats = ({ navigation }) => {
       <View>
         <TouchableOpacity style={styles.button3} onPress={() => navigation.navigate('IngredientCreation')}><Text style={styles.buttonText}>Ajouter un ingrédient</Text></TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
 
   );
 }

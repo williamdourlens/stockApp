@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView } from 'react-native'
 import jsonData from '../components/database.json'
 import ModalDropdown from 'react-native-modal-dropdown';
 
@@ -12,7 +12,7 @@ const PlatsCreation = ({ navigation }) => {
   
 const [selectedCategory, setSelectedCategory] = useState(null);
 return (
-	<View style={styles.container}>
+	<ScrollView style={styles.container}>
 		<Text style={styles.Title}>Ajouter un plat</Text>
 		
 		<View style={styles.div2}>
@@ -29,10 +29,41 @@ return (
 				style={styles.newcateg}
 				placeholder="Description"
 			/>
+			<TextInput
+				style={styles.newcateg}
+				placeholder="Quantité"
+				keyboardType="numeric"
+			/>
+			<TextInput
+				style={styles.newcateg}
+				placeholder="Valeur énergétique"
+				keyboardType="numeric"
+			/>
+			<TextInput
+				style={styles.newcateg}
+				placeholder="Matières grasses"
+				keyboardType="numeric"
+			/>
+			<TextInput
+				style={styles.newcateg}
+				placeholder="Glucides"
+				keyboardType="numeric"
+			/>
+			<TextInput
+				style={styles.newcateg}
+				placeholder="Protéines"
+				keyboardType="numeric"
+			/>
+			<TextInput
+				style={styles.newcateg}
+				placeholder="Sel"
+				keyboardType="numeric"
+			/>
+
 			<ModalDropdown
 				options={data ? [...data.map(category => category.nom)] : ['Chargement des données...']}
-				onSelect={(value) => setSelectedCategory(value === 'Sélectionnez un fournisseur' ? '' : value)}
-				defaultValue="Sélectionnez un fournisseur"
+				onSelect={(value) => setSelectedCategory(value === 'Sélectionnez un catégorie' ? '' : value)}
+				defaultValue="Sélectionnez une catégorie"
 				style={styles.selectCategory}
 			/>
 
@@ -40,9 +71,9 @@ return (
 		</View>
 
         <View>
-			<TouchableOpacity style={styles.button} onPress={() => navigation.navigate('PlatsIngredients')}><Text style={styles.buttonText}>Mettre les ingrédients dans le plat</Text></TouchableOpacity>
+			<TouchableOpacity style={styles.button} onPress={() => navigation.navigate('PlatsIngredients')}><Text style={styles.buttonText}>Ajouter les ingrédients dans le plat</Text></TouchableOpacity>
 		</View>
-	</View>
+	</ScrollView>
 );
 }
 
@@ -99,9 +130,20 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     textAlign: 'center',
     justifyContent: 'center',
-    marginRight: 10,
 	marginVertical: 10,
     borderRadius: 5,
+  },
+  selectCategory: {
+	color: 'red',
+	backgroundColor: '#ECAB03',
+	width: 230,
+	height: 40,
+	fontSize: 20,
+	paddingTop: 5,
+	textAlign: 'center',
+	justifyContent: 'center',
+	marginVertical: 10,
+	borderRadius: 5,
   },
 
 });

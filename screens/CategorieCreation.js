@@ -3,7 +3,7 @@ import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, Vi
 import jsonData from '../components/database.json'
 import ModalDropdown from 'react-native-modal-dropdown';
 
-const CategorieCreation = () => {
+const CategorieCreation = ({ navigation }) => {
     const [data, getData] = useState(null);
 
     useEffect(() => {

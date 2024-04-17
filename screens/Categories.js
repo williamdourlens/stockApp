@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/core'
 import React, { useState, useEffect } from 'react';
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView } from 'react-native'
 import jsonData from '../components/database.json'
 
 const Categories = ({ navigation }) => {
@@ -11,7 +11,7 @@ const Categories = ({ navigation }) => {
   }, []);
   
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Text style={styles.Title}>Liste des Catégories</Text>
       {data ? (
         data.map((item) => (
@@ -31,7 +31,7 @@ const Categories = ({ navigation }) => {
 		<View>
         	<TouchableOpacity style={styles.button2} onPress={() => navigation.navigate('CategorieCreation')}><Text style={styles.buttonText}>Ajouter une catégorie</Text></TouchableOpacity>
       	</View>
-    </View>
+    </ScrollView>
 
   );
 }

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView } from 'react-native'
 import jsonData from '../components/database.json'
 import ModalDropdown from 'react-native-modal-dropdown';
 
-const PlatsIngredients = () => {
+const PlatsIngredients = ({ navigation }) => {
     const [data, getData] = useState(null);
 
     useEffect(() => {
@@ -15,12 +15,26 @@ const PlatsIngredients = () => {
 
     const [selectedCategory, setSelectedCategory] = useState(null);
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <Text style={styles.Title}>Ajouter les ingrédients au plat</Text>
+            {data ? (
+                data.map((item) => (
+                    <View style={styles.div2}>
+                        <TouchableOpacity onPress={() => setSelectedCategory(item.nom)}>
+                            <Text style={styles.nameplat}>
+                                {item.nom}
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                ))
+            ) : null}
 
-
-            
-        </View>
+            <View>
+                <TouchableOpacity style={styles.button2} onPress={() => navigation.navigate('Home')}>
+                    <Text style={styles.buttonText}>Valider les ingrédients</Text>
+                </TouchableOpacity>
+            </View>
+        </ScrollView>
     );
 }
 
@@ -28,6 +42,18 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#1E1E1E',
+    },
+    nameplat: {
+        color: 'black',
+        backgroundColor: '#ECAB03',
+        width: 230,
+        height: 40,
+        fontSize: 20,
+        paddingTop: 5,
+        textAlign: 'center',
+        justifyContent: 'center',
+        marginVertical: 10,
+        borderRadius: 5,
     },
     Title: {
         marginTop: 40,
