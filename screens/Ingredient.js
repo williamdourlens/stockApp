@@ -1,21 +1,31 @@
 import { useNavigation } from '@react-navigation/core'
 import React, { useState, useEffect } from 'react'
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView } from 'react-native'
-import jsonData from '../components/database.json'
 
 const Plats = ({ navigation }) => {
-  const [data, getData] = useState(null);
+  const [ingred, getingred] = useState(null);
 
   useEffect(() => {
-    getData(jsonData['ingredients']);
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://192.168.1.79:8000/ingredient/get");
+        const data = await response.json();
+        console.log(data);
+        getingred(data);
+      } catch (error) {
+        console.error('Erreur de fetch:', error);
+      }
+    };
+  
+    fetchData();
   }, []);
   
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.Title}>Liste des Ingrédients</Text>
-      {data ? (
-        data.map((item) => (
-          <View style={styles.div} key={item.id_categorie}>
+      {ingred ? (
+        ingred.map((item) => (
+          <View style={styles.div} key={item.id}>
             <Text style={styles.nameplat}>{item.nom}</Text> 
             <Text style={styles.infoplat}>{item.quantite}</Text> 
 

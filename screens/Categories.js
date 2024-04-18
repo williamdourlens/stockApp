@@ -1,21 +1,31 @@
 import { useNavigation } from '@react-navigation/core'
 import React, { useState, useEffect } from 'react';
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView } from 'react-native'
-import jsonData from '../components/database.json'
 
 const Categories = ({ navigation }) => {
-  const [data, getData] = useState(null);
+  const [categ, getcateg] = useState(null);
 
   useEffect(() => {
-    getData(jsonData['categories']);
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://192.168.1.79:8000/categorie/get");
+        const data = await response.json();
+        console.log(data);
+        getcateg(data);
+      } catch (error) {
+        console.error('Erreur de fetch:', error);
+      }
+    };
+  
+    fetchData();
   }, []);
   
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.Title}>Liste des Catégories</Text>
-      {data ? (
-        data.map((item) => (
-          <View style={styles.div} key={item.id_categorie}>
+      {categ ? (
+        categ.map((item) => (
+          <View style={styles.div} key={item.id}>
             <Text style={styles.namecateg}>{item.nom}</Text> 
   
             <TouchableOpacity style={styles.button}>
