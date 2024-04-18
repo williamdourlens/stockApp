@@ -1,56 +1,90 @@
 import React, { useState, useEffect } from 'react';
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import jsonData from '../components/database.json'
+import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import ModalDropdown from 'react-native-modal-dropdown';
 
 const IngredientCreation = ({ navigation }) => {
-  const [data, getData] = useState(null);
+  const [fournisseurs, setFournisseurs] = useState([]);
+  const [ingredientName, setIngredientName] = useState('');
+  const [quantity, setQuantity] = useState('');
+  const [isAllergen, setIsAllergen] = useState(false);
+  const [selectedFournisseur, setSelectedFournisseur] = useState('');
 
   useEffect(() => {
-    getData(jsonData['fournisseurs']);
-  }, []);
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://192.168.1.79:8000/fournisseur/get");
+        const data = await response.json();
+        setFournisseurs(data);
+      } catch (error) {
+        console.error('Erreur de fetch:', error);
+      }
+    };
   
-const [isAllergen, setIsAllergen] = useState(false);
+    fetchData();
+  }, []);
 
-const handleToggleAllergen = () => {
+  const handleToggleAllergen = () => {
     setIsAllergen(!isAllergen);
-};
-const [selectedCategory, setSelectedCategory] = useState(null);
-return (
-	<View style={styles.container}>
-		<Text style={styles.Title}>Ajouter un ingrédient</Text>
-		
-		<View style={styles.div2}>
-			<TextInput
-				style={styles.newcateg}
-				placeholder="Nom de l'ingredient"
-			/>
-			<TextInput
-				style={styles.newcateg}
-				placeholder="Quantité"
-				keyboardType="numeric"
-			/>
-			<TouchableOpacity
-				style={[styles.newcateg, { backgroundColor: isAllergen ? '#ECAB03' : '#ECAB03' }]}
-				onPress={handleToggleAllergen}
-			>
-				<Text style={styles.buttonText}>{isAllergen ? 'Allergène ✅' : 'Allergène ❌'}</Text>
-			</TouchableOpacity>
-			<ModalDropdown
-				options={data ? [...data.map(category => category.nom)] : ['Chargement des données...']}
-				onSelect={(value) => setSelectedCategory(value === 'Sélectionnez un fournisseur' ? '' : value)}
-				defaultValue="Sélectionnez un fournisseur"
-				style={styles.selectCategory}
-			/>
-			<TouchableOpacity style={styles.button2}
-				//</View>onPress={handleAddIngredient}
-			>
-				<Text style={styles.buttonText2}>Ajouter</Text>
-			</TouchableOpacity>
-		</View>
-	</View>
-);
+    console.log('isAllergen:', isAllergen);
+  };
+
+  const handleAddIngredient = () => {
+    const newIngredient = {
+      name: ingredientName,
+      quantite: quantity,
+      is_allergen: isAllergen,
+      id_fournisseur: selectedFournisseur};
+    console.log('newIngredient:', newIngredient);
+
+    fetch('http://192.168.1.79:8000/ingredient/post', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newIngredient),
+      })
+      .then(response => response.json()) // Convertit la réponse en JSON
+      .then(data => console.log(data)) // Affiche les données retournées
+      .catch(error => console.log('Erreur :', error)); // Gère les erreurs
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.Title}>Ajouter un ingrédient</Text>
+      <View style={styles.div2}>
+        <TextInput
+          style={styles.newcateg}
+          placeholder="Nom de l'ingredient"
+          onChangeText={text => setIngredientName(text)}
+        />
+        <TextInput
+          style={styles.newcateg}
+          placeholder="Quantité"
+          keyboardType="numeric"
+          onChangeText={text => setQuantity(text)}
+        />
+        <TouchableOpacity
+          style={[styles.newcateg, { backgroundColor: isAllergen ? '#ECAB03' : '#ECAB03' }]}
+          onPress={handleToggleAllergen}
+        >
+          <Text style={styles.buttonText}>{isAllergen ? 'Allergène ✅' : 'Allergène ❌'}</Text>
+        </TouchableOpacity>
+        <ModalDropdown
+          style={styles.selectCategory}
+          options={fournisseurs.map(fournisseurs => `${fournisseurs.name} (${fournisseurs.id})`)}
+          defaultValue="Sélectionner un fournisseur"
+          onSelect={(index, value) => setSelectedFournisseur(fournisseurs[index].id)}
+        />
+
+        <TouchableOpacity style={styles.button2} onPress={handleAddIngredient()}>
+          <Text style={styles.buttonText2}>Ajouter</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
 }
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -148,7 +182,6 @@ const styles = StyleSheet.create({
 	marginVertical: 10,
 	borderRadius: 5,
   },
-
 });
 
 export default IngredientCreation;
