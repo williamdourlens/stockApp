@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView } from 'react-native'
-import jsonData from '../components/database.json'
+import ip from '../components/ip'
 import ModalDropdown from 'react-native-modal-dropdown';
 
 const PlatsIngredients = ({ navigation }) => {

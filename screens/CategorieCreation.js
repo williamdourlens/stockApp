@@ -13,7 +13,7 @@ const CategorieCreation = ({ navigation }) => {
         };
         console.log('newCategory:', newCategory);
 
-        fetch('http://192.168.1.11:8000/categorie/post', {
+        fetch('http://'+ip+':8000/categorie/post', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

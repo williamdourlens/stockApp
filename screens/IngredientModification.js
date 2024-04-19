@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView } from 'react-native';
-import jsonData from '../components/database.json';
+import ip from '../components/ip';
 import ModalDropdown from 'react-native-modal-dropdown';
 
 const IngredientModification = ({ route, navigation }) => {
@@ -15,7 +15,7 @@ const IngredientModification = ({ route, navigation }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch("http://192.168.1.11:8000/ingredient/get/" + IngredientId);
+                const response = await fetch("http://"+ip+":8000/ingredient/get/" + IngredientId);
                 const data = await response.json();
                 console.log('data', data);
                 getIngre(data);
@@ -26,7 +26,7 @@ const IngredientModification = ({ route, navigation }) => {
                 console.error('Erreur de fetch:', error);
             }
             try {
-                const response = await fetch("http://192.168.1.11:8000/fournisseur/get");
+                const response = await fetch("http://"+ip+":8000/fournisseur/get");
                 const nom = await response.json();
                 setListeFournisseurs(nom);
             } catch (error) {

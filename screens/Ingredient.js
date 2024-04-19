@@ -9,7 +9,7 @@ const Plats = ({ navigation }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://192.168.1.11:8000/ingredient/get");
+        const response = await fetch("http://"+ip+":8000/ingredient/get");
         const data = await response.json();
         console.log(data);
         getingred(data);

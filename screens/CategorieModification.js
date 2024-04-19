@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import jsonData from '../components/database.json';
+import ip from '../components/ip';
 
 const CategorieModification = ({ route, navigation }) => {
     const { categorieId } = route.params;
@@ -9,7 +9,7 @@ const CategorieModification = ({ route, navigation }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://192.168.1.11:8000/categorie/get/"+categorieId);
+        const response = await fetch("http://"+ip+":8000/categorie/get/"+categorieId);
         const data = await response.json();
         console.log(data);
         getcateg(data);

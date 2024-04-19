@@ -9,7 +9,7 @@ const Categories = ({ navigation }) => {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await fetch("http://192.168.1.11:8000/categorie/get");
+				const response = await fetch("http://"+ip+":8000/categorie/get");
 				const data = await response.json();
 				console.log(data);
 				getcateg(data);
