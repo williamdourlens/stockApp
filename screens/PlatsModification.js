@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView } from 'react-native';
-import jsonData from '../components/database.json';
+import id from '../components/ip';
 import ModalDropdown from 'react-native-modal-dropdown';
 
 const PlatsModification = ({ route, navigation }) => {
@@ -22,7 +22,7 @@ const PlatsModification = ({ route, navigation }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch("http://192.168.1.11:8000/plat/get/" + PlatId);
+                const response = await fetch("http://"+id+":8000/plat/get/" + PlatId);
                 const data = await response.json();
                 console.log('data', data);
                 getPlat(data);
@@ -41,7 +41,7 @@ const PlatsModification = ({ route, navigation }) => {
                 console.error('Erreur de fetch:', error);
             }
             try {
-                const response = await fetch("http://192.168.1.11:8000/categorie/get");
+                const response = await fetch("http://"+id+":8000/categorie/get");
                 const categor = await response.json();
                 getCateg(categor);
             } catch (error) {
@@ -52,6 +52,49 @@ const PlatsModification = ({ route, navigation }) => {
         fetchData();
     }, []);
 
+    const handleUpdatePlat = () => {
+        const newPlat = {
+            nom: platName,
+            prix: prix,
+            description: description,
+            quantite: quantite,
+            valeur_energetique: valeurEnergetique,
+            matiere_grasse: matieresGrasses,
+            glucide: glucides,
+            proteine: proteines,
+            sel: sel,
+            id_categorie: selectCategorie
+        };
+        console.log('newPlat:', newPlat);
+
+        fetch('http://'+id+':8000/plat/patch/' + PlatId, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newPlat),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Données renvoyées :", data);
+        })
+        .catch(error => console.log('Erreur :', error));
+
+        navigation.navigate('PlatsModificationIngredient')
+    }
+
+    const handleDeletePlat = () => {
+        fetch('http://'+id+':8000/plat/delete/' + PlatId, {
+            method: 'DELETE',
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Données renvoyées :", data);
+        })
+        .catch(error => console.log('Erreur :', error));
+
+        navigation.navigate('Home')
+    }
 
     return (
         <ScrollView style={styles.container}>
@@ -62,68 +105,130 @@ const PlatsModification = ({ route, navigation }) => {
                     value={platName}
                     onChangeText={(text) => setPlatNom({ ...plat, nom: text })}
                 />
-                <TextInput
-                    style={styles.newcateg}
-                    keyboardType="numeric"
-                    value={String(prix)}
-                    onChangeText={text => setPrix(text)}
-                />
-                <TextInput
-                    style={styles.newcateg}
-                    value={description}
-                    onChangeText={text => setDescription({ ...plat, description: text })}
-                />
-                <TextInput
-                    style={styles.newcateg}
-                    value={String(quantite)}
-                    keyboardType="numeric"
-                    onChangeText={text => setQuantite(text)}
-                />
-                <TextInput
-                    style={styles.newcateg}
-                    value={String(valeurEnergetique)}
-                    keyboardType="numeric"
-                    onChangeText={text => setValeurEnergetique(text)}
-                />
-                <TextInput
-                    style={styles.newcateg}
+
+                <View style={styles.divhozi}>
+                    <Text style={styles.titreitem}>
+                        prix :
+                    </Text>
+                    <TextInput
+                        style={styles.infoitem}
+                        keyboardType="numeric"
+                        value={String(prix)}
+                        onChangeText={text => setPrix(text)}
+                    />
+                </View>
+
+                <View style={styles.divhozi}>
+                    <Text style={styles.titreitem}>
+                        quantite :
+                    </Text>
+                    <TextInput
+                        style={styles.infoitem}
+                        value={String(quantite)}
+                        keyboardType="numeric"
+                        onChangeText={text => setQuantite(text)}
+                    />
+                </View>
+                
+            <Text style={styles.Title}>Information suivantes en grammes</Text>
+                <View style={styles.divhozi}>
+                    <Text style={styles.titreitem}>
+                        valeurs
+                        {"\n"}
+                        energetiques
+                    </Text>
+                    <TextInput
+                        style={styles.infoitem}
+                        value={String(valeurEnergetique)}
+                        keyboardType="numeric"
+                        onChangeText={text => setValeurEnergetique(text)}
+                    />
+                </View>
+
+                <View style={styles.divhozi}>
+                    <Text style={styles.titreitem}>
+                        Matières
+                        {"\n"}
+                        Grasses
+                    </Text>
+                    <TextInput
+                    style={styles.infoitem}
                     value={String(matieresGrasses)}
                     keyboardType="numeric"
                     onChangeText={text => setMatieresGrasses(text)}
                 />
-                <TextInput
-                    style={styles.newcateg}
+                </View>
+
+                <View style={styles.divhozi}>
+                    <Text style={styles.titreitem}>
+                        glucides
+                    </Text>
+                    <TextInput
+                    style={styles.infoitem}
                     value={String(glucides)}
                     keyboardType="numeric"
                     onChangeText={text => setGlucides(text)}
                 />
-                <TextInput
-                    style={styles.newcateg}
+                </View>
+
+                <View style={styles.divhozi}>
+                    <Text style={styles.titreitem}>
+                        Protéines
+                    </Text>
+                    <TextInput
+                    style={styles.infoitem}
                     value={String(proteines)}
                     keyboardType="numeric"
                     onChangeText={text => setProteines(text)}
                 />
-                <TextInput
-                    style={styles.newcateg}
+
+                </View>
+                <View style={styles.divhozi}>
+
+                    <Text style={styles.titreitem}>
+                        Sel
+                    </Text>
+                    <TextInput
+                    style={styles.infoitem}
                     value={String(sel)}
                     keyboardType="numeric"
                     onChangeText={text => setSel(text)}
                 />
+                </View>
 
-                <ModalDropdown
+                <View style={styles.divhozi}>
+                    <Text style={styles.titreitem}>
+                        Categorie
+                    </Text>
+                    <ModalDropdown
                     options={categ ? [...categ.map(fournis => fournis.nom)] : ['Chargement des données...']}
                     defaultValue={selectCategorie ? categ.find(fournis => fournis.id === selectCategorie)?.nom : ''}
                     onSelect={(value) => setIdCategorie(value === 'Sélectionnez une catégorie' ? '' : value)}
-                    style={styles.selectCategory}
+                    style={styles.infoitem}
                 />
+                </View>
+
+                <View>
+
+                    <Text style={styles.newcateg}>
+                        Description
+                    </Text>
+                    <TextInput
+                    style={styles.bigdescription}
+                    value={description}
+                    onChangeText={text => setDescription({ ...plat, description: text })}
+                />
+                </View>
+
             </View>
 
-            <TouchableOpacity style={styles.button}>
-                <Text style={styles.buttonText} onPress={() => navigation.navigate('PlatsModificationIngredients', { PlatId })}>Passer aux ingrédients</Text>
-            </TouchableOpacity>
             <TouchableOpacity style={styles.button2}>
+                <Text style={styles.buttonText2}>Valider</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button2} onPress={handleDeletePlat}>
                 <Text style={styles.buttonText2}>Supprimer</Text>
             </TouchableOpacity>
+
         </ScrollView>
     );
 }
@@ -201,6 +306,51 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         borderRadius: 5,
     },
+    divhozi: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '100%',
+    },
+    titreitem: {
+        color: 'black',
+        backgroundColor: '#ECAB03',
+        width: 120,
+        height: 60,
+        fontSize: 20,
+        paddingTop: 5,
+        textAlign: 'center',
+        justifyContent: 'center',
+        marginVertical: 10,
+        marginLeft: 65,
+        borderRadius: 5,
+    },
+    infoitem: {
+        color: 'black',
+        backgroundColor: '#ECAB03',
+        width: 110,
+        height: 60,
+        fontSize: 20,
+        paddingTop: 5,
+        textAlign: 'center',
+        justifyContent: 'center',
+        marginVertical: 10,
+        marginRight: 65,
+        borderRadius: 5,
+    },
+    bigdescription: {
+        color: 'black',
+        backgroundColor: '#ECAB03',
+        width: 230,
+        height: 100,
+        fontSize: 20,
+        paddingTop: 5,
+        textAlign: 'center',
+        justifyContent: 'center',
+        marginVertical: 10,
+        marginHorizontal: 65,
+        borderRadius: 5,
+    },
+    
 
 });
 
