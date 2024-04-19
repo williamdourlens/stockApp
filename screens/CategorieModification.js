@@ -21,6 +21,46 @@ const CategorieModification = ({ route, navigation }) => {
     fetchData();
   }, []);
 
+
+  const handleUpdateCategorie = () => {
+    const newCategorie = {
+      nom: categ.nom,
+    };
+    console.log('newCategorie:', newCategorie);
+
+    fetch('http://'+ip+':8000/categorie/patch/'+categorieId, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newCategorie),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Données renvoyées :", data);
+        })
+        .catch(error => console.log('Erreur :', error));
+
+        navigation.navigate('Home');
+    };
+    
+    const handleDeleteCategorie = () => {   
+        fetch('http://'+ip+':8000/categorie/delete/'+categorieId, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Données renvoyées :", data);
+        })
+        .catch(error => console.log('Erreur :', error));
+
+        navigation.navigate('Home');
+    }
+
+
     return (
         <View style={styles.container}>
             <Text style={styles.Title}>Modifier la catégorie</Text>
@@ -32,10 +72,10 @@ const CategorieModification = ({ route, navigation }) => {
                 />
             </View>
 
-            <TouchableOpacity style={styles.button2}>
+            <TouchableOpacity style={styles.button2} onPress={handleUpdateCategorie}>
                 <Text style={styles.buttonText2}>Valider</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button2}>
+            <TouchableOpacity style={styles.button2} onPress={handleDeleteCategorie}>
                 <Text style={styles.buttonText2}>Supprimer</Text>
             </TouchableOpacity>
         </View>
