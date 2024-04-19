@@ -24,7 +24,6 @@ const CategorieModification = ({ route, navigation }) => {
     return (
         <View style={styles.container}>
             <Text style={styles.Title}>Modifier la catégorie</Text>
-            <Text style={styles.newcateg}>ID de la catégorie : {categorieId}</Text>
             <View style={styles.div}>
                 <TextInput
                     style={styles.newcateg}

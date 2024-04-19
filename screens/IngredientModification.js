@@ -40,12 +40,7 @@ const IngredientModification = ({ route, navigation }) => {
 
     return (
         <ScrollView style={styles.container}>
-            <Text style={styles.Title}>Modifier la catégorie</Text>
-            <Text style={styles.newcateg}>ID de la catégorie : {IngredientId}</Text>
-            <Text style={styles.newcateg}>NOM : {ingre.nom}</Text>
-            <Text style={styles.newcateg}>QUANTITE : {ingre.quantite}</Text>
-            <Text style={styles.newcateg}>ALLERgre : {ingre.isAllergene ? 'true' : 'false'}</Text>
-            <Text style={styles.newcateg}>FOURNI : {ingre.idFournisseur}</Text>
+            <Text style={styles.Title}>Modifier l'ingrédient</Text>
             <View style={styles.div2}>
                 <TextInput
                     style={styles.newcateg}
@@ -71,29 +66,6 @@ const IngredientModification = ({ route, navigation }) => {
                     defaultValue={selectedFournisseur ? fournisseurs.find(fournis => fournis.id === selectedFournisseur)?.nom : ''}
                     onSelect={(value) => setSelectedFournisseur(value === 'Sélectionnez un fournisseur' ? '' : value)}
                     style={styles.selectCategory}
-                />
-
-
-                <TextInput
-                    style={styles.newcateg}
-                    value={ingre.nom}
-                    onChangeText={(text) => getIngre({ ...ingre, nom: text })}
-                /><TextInput
-                    style={styles.newcateg}
-                    value={ingre.nom}
-                    onChangeText={(text) => getIngre({ ...ingre, nom: text })}
-                /><TextInput
-                    style={styles.newcateg}
-                    value={ingre.nom}
-                    onChangeText={(text) => getIngre({ ...ingre, nom: text })}
-                /><TextInput
-                    style={styles.newcateg}
-                    value={ingre.nom}
-                    onChangeText={(text) => getIngre({ ...ingre, nom: text })}
-                /><TextInput
-                    style={styles.newcateg}
-                    value={ingre.nom}
-                    onChangeText={(text) => getIngre({ ...ingre, nom: text })}
                 />
 
             </View>
