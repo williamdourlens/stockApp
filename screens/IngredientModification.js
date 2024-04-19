@@ -37,6 +37,44 @@ const IngredientModification = ({ route, navigation }) => {
         fetchData();
     }, []);
 
+    const handleUpdateIngredient = () => {
+        const newIngredient = {
+            nom: ingre.nom,
+            quantite: ingredientQuantity,
+            isAllergene: isAllergene ? 1 : 0,
+            id_fournisseur: selectedFournisseur
+        };
+        console.log('newIngredient:', newIngredient);
+
+        fetch('http://'+ip+':8000/ingredient/patch/' + IngredientId, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newIngredient),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Données renvoyées :", data);
+        })
+        .catch(error => console.log('Erreur :', error));
+
+        navigation.navigate('Home')
+    }
+    const handleDeleteIngredient = () => {
+        fetch('http://'+ip+':8000/ingredient/delete/' + IngredientId, {
+            method: 'DELETE',
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Données renvoyées :", data);
+        })
+        .catch(error => console.log('Erreur :', error));
+
+        navigation.navigate('Home')
+    }
+
+
 
     return (
         <ScrollView style={styles.container}>
@@ -70,10 +108,10 @@ const IngredientModification = ({ route, navigation }) => {
 
             </View>
 
-            <TouchableOpacity style={styles.button2}>
+            <TouchableOpacity style={styles.button2} onPress={handleUpdateIngredient}>
                 <Text style={styles.buttonText2}>Valider</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button2}>
+            <TouchableOpacity style={styles.button2} onPress={handleDeleteIngredient}>
                 <Text style={styles.buttonText2}>Supprimer</Text>
             </TouchableOpacity>
         </ScrollView>
