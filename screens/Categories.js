@@ -9,7 +9,7 @@ const Categories = ({ navigation }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://"+ip+":8000/categorie/get");
+        const response = await fetch("http://10.60.136.110:8000/categorie/get");
         const data = await response.json();
         console.log(data);
         getcateg(data);
@@ -29,9 +29,12 @@ const Categories = ({ navigation }) => {
           <View style={styles.div} key={item.id}>
             <Text style={styles.namecateg}>{item.nom}</Text> 
   
-            <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText}>Modifier</Text>
-            </TouchableOpacity>
+			<View>
+				<TouchableOpacity style={styles.button}>
+					<Text style={styles.buttonText} onPress={() => navigation.navigate('CategorieModification', { categorieId: item.id })}>Modifier</Text>
+				</TouchableOpacity>
+			</View>
+            
   
             <TouchableOpacity style={styles.button}>
               <Text style={styles.buttonText}>Supprimer</Text>

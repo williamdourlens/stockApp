@@ -35,7 +35,7 @@ const PlatsCreation = ({ navigation }) => {
         };
         console.log('newPlat:', newPlat);
 
-        fetch('http://'+ip+':8000/plat/post', {
+        fetch('http://10.60.136.110:8000/plat/post', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

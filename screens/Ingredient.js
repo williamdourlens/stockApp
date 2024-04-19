@@ -31,9 +31,11 @@ const Plats = ({ navigation }) => {
             <Text style={styles.infoplat}>{item.quantite}</Text> 
 
   
-            <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText}>Modifier</Text>
-            </TouchableOpacity>
+            <View>
+				<TouchableOpacity style={styles.button}>
+					<Text style={styles.buttonText} onPress={() => navigation.navigate('IngredientModification', { IngredientId: item.id })}>Modifier</Text>
+				</TouchableOpacity>
+			</View>
   
             <TouchableOpacity style={styles.button}>
               <Text style={styles.buttonText}>Supprimer</Text>

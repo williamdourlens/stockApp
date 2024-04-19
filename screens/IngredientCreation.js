@@ -13,7 +13,7 @@ const IngredientCreation = ({ navigation }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://"+ip+":8000/fournisseur/get");
+        const response = await fetch("http://10.60.136.110:8000/fournisseur/get");
         const data = await response.json();
         setFournisseurs(data);
       } catch (error) {
