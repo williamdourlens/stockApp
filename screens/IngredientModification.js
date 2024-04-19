@@ -8,7 +8,7 @@ const IngredientModification = ({ route, navigation }) => {
     const [ingre, getIngre] = useState(IngredientId);
     const [ingredientQuantity, setIngredientQuantity] = useState();
     const [isAllergene, setIsAllergene] = useState();
-    const [selectedFournisseur, setSelectedFournisseur] = useState();
+    const [selectedFournisseur, setSelectedFournisseur] = useState('');
     const [fournisseurs, setListeFournisseurs] = useState([]);
     
 

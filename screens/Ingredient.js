@@ -28,14 +28,10 @@ const Plats = ({ navigation }) => {
         ingred.map((item) => (
           <View style={styles.div} key={item.id}>
             <Text style={styles.nameplat}>{item.nom}</Text> 
-            <Text style={styles.infoplat}>{item.quantite}</Text> 
-
-  
-            <View>
-				<TouchableOpacity style={styles.button}>
-					<Text style={styles.buttonText} onPress={() => navigation.navigate('IngredientModification', { IngredientId: item.id })}>Modifier</Text>
-				</TouchableOpacity>
-			</View>
+            <Text style={styles.infoplat}>{item.quantite}</Text>
+			<TouchableOpacity style={styles.button}>
+				<Text style={styles.buttonText} onPress={() => navigation.navigate('IngredientModification', { IngredientId: item.id })}>Modifier</Text>
+			</TouchableOpacity>
           </View>
         ))
       ) : null}
