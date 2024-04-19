@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/core'
 import React, { useState, useEffect } from 'react';
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView } from 'react-native'
+import ip from '../components/ip';
 
 const Categories = ({ navigation }) => {
   const [categ, getcateg] = useState(null);
@@ -8,7 +9,7 @@ const Categories = ({ navigation }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://192.168.1.79:8000/categorie/get");
+        const response = await fetch("http://"+ip+":8000/categorie/get");
         const data = await response.json();
         console.log(data);
         getcateg(data);

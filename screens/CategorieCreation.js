@@ -1,14 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import jsonData from '../components/database.json'
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import ModalDropdown from 'react-native-modal-dropdown';
+import ip from '../components/ip';
 
 const CategorieCreation = ({ navigation }) => {
-    const [data, getData] = useState(null);
+    const [categorieName, setCategorieName] = useState('');
 
-    useEffect(() => {
-        getData(jsonData['categories']);
-    }, []);
+    const handleAddCategory = () => {
+        const newCategory = {
+            nom: categorieName,
+            // Ajoutez d'autres propriétés de votre objet newCategory si nécessaire
+        };
+        console.log('newCategory:', newCategory);
+
+        fetch('http://'+ip+':8000/categorie/post', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newCategory),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Données renvoyées :", data);
+            })
+            .catch(error => console.log('Erreur :', error));
+
+        navigation.navigate('Home');
+    };
 
     return (
         <View style={styles.container}>
@@ -16,12 +35,12 @@ const CategorieCreation = ({ navigation }) => {
             <View style={styles.div}>
                 <TextInput
                     style={styles.newcateg}
-                    placeholder="Nom de la categorie"
+                    placeholder="Nom de la catégorie"
+                    onChangeText={setCategorieName} // Utilisation directe de setCategorieName
+                    value={categorieName} // Ajout de la valeur de l'input
                 />
             </View>
-            <TouchableOpacity style={styles.button2}
-            //</View>onPress={handleAddCategory}
-            >
+            <TouchableOpacity style={styles.button2} onPress={handleAddCategory}>
                 <Text style={styles.buttonText2}>Ajouter</Text>
             </TouchableOpacity>
         </View>
@@ -42,15 +61,6 @@ const styles = StyleSheet.create({
         marginHorizontal: 40,
         textAlign: 'center',
         marginBottom: 20,
-    },
-    button: {
-      backgroundColor: '#ECAB03',
-      paddingVertical: 10,
-      paddingHorizontal: 10,
-      borderRadius: 5,
-      marginHorizontal: 50,
-      alignItems: 'center',
-      justifyContent: 'center',
     },
     button2: {
         backgroundColor: '#ECAB03',
@@ -78,7 +88,6 @@ const styles = StyleSheet.create({
         marginHorizontal: 65,
         borderRadius: 5,
     },
-
 });
 
 export default CategorieCreation;

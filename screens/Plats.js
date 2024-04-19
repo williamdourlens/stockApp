@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, ScrollView } from 'react-native';
+import ip from '../components/ip';
 
 const Plats = ({navigation}) => {
   const [plats, setPlats] = useState([]);
@@ -7,7 +8,7 @@ const Plats = ({navigation}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://192.168.1.79:8000/plat/get");
+        const response = await fetch("http://"+ip+":8000/plat/get");
         const data = await response.json();
         console.log(data);
         setPlats(data);
