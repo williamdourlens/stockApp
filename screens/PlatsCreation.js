@@ -35,18 +35,20 @@ const PlatsCreation = ({ navigation }) => {
         };
         console.log('newPlat:', newPlat);
 
-        fetch('http://'+ip+':8000/plat/post', {
+        fetch('http://' + ip + ':8000/plat/post', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(newPlat),
         })
-            .then(response => response.json())
-            .then(data => {
-                console.log("Données renvoyées :", data);
-            })
-            .catch(error => console.log('Erreur :', error));
+        .then(response => response.json())
+        .then(data => {
+            console.log("Données renvoyées :", data);
+        })
+        .catch(error => console.log('Erreur :', error));
+
+        navigation.navigate('PlatsIngredients');
     };
 
     return (
@@ -125,7 +127,7 @@ const PlatsCreation = ({ navigation }) => {
 
             <View>
                 <TouchableOpacity style={styles.button} onPress={handleAddPlat}>
-                    <Text style={styles.buttonText}>Ajouter le plat</Text>
+                    <Text style={styles.buttonText}>Ajouter les ingrédients du plat</Text>
                 </TouchableOpacity>
             </View>
         </ScrollView>

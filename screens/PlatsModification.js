@@ -31,9 +31,9 @@ const PlatsModification = ({ route, navigation }) => {
                 setDescription(data.description);
                 setQuantite(data.quantite);
                 setValeurEnergetique(data.valeurEnergetique);
-                setMatieresGrasses(data.matieresGrasses);
-                setGlucides(data.glucides);
-                setProteines(data.proteines);
+                setMatieresGrasses(data.matiereGrasse);
+                setGlucides(data.glucide);
+                setProteines(data.proteine);
                 setSel(data.sel);
                 setIdCategorie(data.idCategorie);
 
@@ -55,7 +55,7 @@ const PlatsModification = ({ route, navigation }) => {
 
     return (
         <ScrollView style={styles.container}>
-            <Text style={styles.Title}>Ajouter un plat</Text>
+            <Text style={styles.Title}>Modifier un plat</Text>
             <View style={styles.div2}>
                 <TextInput
                     style={styles.newcateg}
@@ -118,8 +118,8 @@ const PlatsModification = ({ route, navigation }) => {
                 />
             </View>
 
-            <TouchableOpacity style={styles.button2}>
-                <Text style={styles.buttonText2}>Valider</Text>
+            <TouchableOpacity style={styles.button}>
+                <Text style={styles.buttonText} onPress={() => navigation.navigate('PlatsModificationIngredients', { PlatId })}>Passer aux ingrédients</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button2}>
                 <Text style={styles.buttonText2}>Supprimer</Text>

@@ -15,6 +15,7 @@ import PlatsIngredients from './screens/PlatsIngredients';
 import CategorieModification from './screens/CategorieModification';
 import IngredientModification from './screens/IngredientModification';
 import PlatsModification from './screens/PlatsModification';
+import PlatsModificationIngredients from './screens/PlatsModificationIngredients';
 
 
 const Stack = createNativeStackNavigator();
@@ -36,6 +37,7 @@ export default function App() {
         <Stack.Screen name="CategorieModification" component={CategorieModification} />
         <Stack.Screen name="IngredientModification" component={IngredientModification} />
         <Stack.Screen name="PlatsModification" component={PlatsModification} />
+        <Stack.Screen name="PlatsModificationIngredients" component={PlatsModificationIngredients} />
       </Stack.Navigator>
     </NavigationContainer>
   );
