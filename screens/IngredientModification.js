@@ -10,6 +10,7 @@ const IngredientModification = ({ route, navigation }) => {
     const [isAllergene, setIsAllergene] = useState();
     const [selectedFournisseur, setSelectedFournisseur] = useState();
     const [fournisseurs, setListeFournisseurs] = useState([]);
+    
 
     useEffect(() => {
         const fetchData = async () => {
@@ -26,7 +27,7 @@ const IngredientModification = ({ route, navigation }) => {
             }
             try {
                 const response = await fetch("http://192.168.1.11:8000/fournisseur/get");
-                const data = await response.json();
+                const nom = await response.json();
                 setListeFournisseurs(nom);
             } catch (error) {
                 console.error('Erreur de fetch:', error);
@@ -65,10 +66,11 @@ const IngredientModification = ({ route, navigation }) => {
                     <Text style={styles.buttonText}>{isAllergene ? 'Allergène ✅' : 'Allergène ❌'}</Text>
                 </TouchableOpacity>
                 <ModalDropdown
+                    
+                    options={fournisseurs ? [...fournisseurs.map(fournis => fournis.nom)] : ['Chargement des données...']}
+                    defaultValue={selectedFournisseur ? fournisseurs.find(fournis => fournis.id === selectedFournisseur)?.nom : ''}
+                    onSelect={(value) => setSelectedFournisseur(value === 'Sélectionnez un fournisseur' ? '' : value)}
                     style={styles.selectCategory}
-                    options={fournisseurs}
-                    defaultValue={selectedFournisseur}
-                    onSelect={(index, value) => setSelectedFournisseur(value)}
                 />
 
 

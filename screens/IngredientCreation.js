@@ -79,7 +79,7 @@ const IngredientCreation = ({ navigation }) => {
         </TouchableOpacity>
 
         <ModalDropdown
-          options={fournisseurs ? [...fournisseurs.map(category => category.nom)] : ['Chargement des données...']}
+          options={fournisseurs ? [...fournisseurs.map(fournis => fournis.nom)] : ['Chargement des données...']}
           onSelect={(value) => setSelectedFournisseur(value === 'Sélectionnez un fournisseur' ? '' : value)}
           defaultValue="Sélectionnez un fournisseur"
           style={styles.selectCategory}
