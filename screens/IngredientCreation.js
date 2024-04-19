@@ -13,7 +13,7 @@ const IngredientCreation = ({ navigation }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://10.60.136.110:8000/fournisseur/get");
+        const response = await fetch("http://192.168.1.11:8000/fournisseur/get");
         const data = await response.json();
         setFournisseurs(data);
       } catch (error) {
@@ -38,7 +38,7 @@ const IngredientCreation = ({ navigation }) => {
     };
     console.log('newIngredient:', newIngredient);
   
-    fetch('http://'+ip+':8000/ingredient/post', {
+    fetch('http://192.168.1.11:8000/ingredient/post', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -77,6 +77,7 @@ const IngredientCreation = ({ navigation }) => {
         >
           <Text style={styles.buttonText}>{isAllergen ? 'Allergène ✅' : 'Allergène ❌'}</Text>
         </TouchableOpacity>
+
         <ModalDropdown
           options={fournisseurs ? [...fournisseurs.map(category => category.nom)] : ['Chargement des données...']}
           onSelect={(value) => setSelectedFournisseur(value === 'Sélectionnez un fournisseur' ? '' : value)}

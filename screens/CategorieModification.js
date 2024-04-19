@@ -9,7 +9,7 @@ const CategorieModification = ({ route, navigation }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://10.60.136.110:8000/categorie/get/"+categorieId);
+        const response = await fetch("http://192.168.1.11:8000/categorie/get/"+categorieId);
         const data = await response.json();
         console.log(data);
         getcateg(data);
