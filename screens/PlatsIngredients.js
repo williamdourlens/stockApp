@@ -1,36 +1,94 @@
 import React, { useState, useEffect } from 'react';
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView } from 'react-native'
 import ip from '../components/ip'
-import ModalDropdown from 'react-native-modal-dropdown';
 
-const PlatsIngredients = ({ navigation }) => {
-    const [data, getData] = useState(null);
+const PlatsIngredients = ({ route,navigation }) => {
+    const PlatId = route.params;
+    const [ingredientIds, setIngredients] = useState([]);
+    const selectedIngredients = [];
 
     useEffect(() => {
-        getData(jsonData['compositionPlats']);
+        const fetchData = async () => {
+            try {
+                const response = await fetch("http://" + ip + ":8000/ingredient/get");
+                const ingredientsData = await response.json();
+                const ingredientIds = ingredientsData.map(ingredient => [ingredient.id, ingredient.nom]);
+                setIngredients(ingredientIds);
+                console.log('IDs des ingrédients:', ingredientIds);
+            } catch (error) {
+                console.error('Erreur de fetch:', error);
+            }
+        };
+    
+        fetchData();
     }, []);
-    useEffect(() => {
-        getData(jsonData['ingredients']);
-    }, []);
+    console.log('PlatId:', PlatId);
 
-    const [selectedCategory, setSelectedCategory] = useState(null);
+    const buttonClicked = (id) => {
+        return () => {
+            console.log('id:', id);
+            const index = selectedIngredients.findIndex(item => item === id);
+            if (index !== -1) {
+                selectedIngredients.splice(index);
+            } else {
+                selectedIngredients.push(id);
+            }
+            console.log('selectedIngredients:', selectedIngredients);
+        };
+    }
+    console.log('selectedIngredients:', selectedIngredients);
+
+    const validateIngredients = (selectedIngredients) => {
+        for (const idelt of selectedIngredients) {
+            console.log('idelt:', idelt);
+            console.log('PlatId:', PlatId);
+            const newComposition = {
+                id_plat: PlatId,
+                id_ingredient: idelt,
+            };
+            console.log('newComposition:', newComposition);
+            
+            fetch('http://' + ip + ':8000/composition_plats/post', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newComposition),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Données renvoyées :", data);
+            })
+            .catch(error => console.log('Erreur :', error));
+
+        }
+        // navigation.navigate('Home');
+    };
+
+
     return (
         <ScrollView style={styles.container}>
             <Text style={styles.Title}>Ajouter les ingrédients au plat</Text>
-            {data ? (
-                data.map((item) => (
-                    <View style={styles.div2}>
-                        <TouchableOpacity onPress={() => setSelectedCategory(item.nom)}>
-                            <Text style={styles.nameplat}>
-                                {item.nom}
-                            </Text>
+            {ingredientIds ? (
+                ingredientIds.map((item) => (
+                    <View style={styles.div2}>                        
+                        <TouchableOpacity 
+                            style={styles.newcateg} 
+                            key={item[0]}
+                            onPress={buttonClicked(item[0])}
+                        >
+                            <Text> {item[0]} : {item[1]} </Text>
                         </TouchableOpacity>
                     </View>
                 ))
             ) : null}
 
             <View>
-                <TouchableOpacity style={styles.button2} onPress={() => navigation.navigate('Home')}>
+                <Text style={styles.Title}>{selectedIngredients.join(', ')}</Text>
+                <TouchableOpacity 
+                    style={styles.button2} 
+                    onPress={() => validateIngredients(selectedIngredients)}
+                >
                     <Text style={styles.buttonText}>Valider les ingrédients</Text>
                 </TouchableOpacity>
             </View>

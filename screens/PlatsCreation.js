@@ -2,19 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView } from 'react-native';
 import ModalDropdown from 'react-native-modal-dropdown';
 import ip from '../components/ip';
+import { set } from 'firebase/database';
 
 const PlatsCreation = ({ navigation }) => {
     const [data, getData] = useState(null);
-    const [platName, setPlatName] = useState('');
-    const [prix, setPrix] = useState('');
-    const [description, setDescription] = useState('');
-    const [quantite, setQuantite] = useState('');
-    const [valeurEnergetique, setValeurEnergetique] = useState('');
-    const [matieresGrasses, setMatieresGrasses] = useState('');
-    const [glucides, setGlucides] = useState('');
-    const [proteines, setProteines] = useState('');
-    const [sel, setSel] = useState('');
-    const [selectedCategory, setSelectedCategory] = useState('');
+    const [newplatget, setNewPlat] = useState('');
+    const [platName, setPlatName] = useState('wololo');
+    const [prix, setPrix] = useState(20);
+    const [description, setDescription] = useState('zggg');
+    const [quantite, setQuantite] = useState('20');
+    const [valeurEnergetique, setValeurEnergetique] = useState('20');
+    const [matieresGrasses, setMatieresGrasses] = useState('20');
+    const [glucides, setGlucides] = useState('20');
+    const [proteines, setProteines] = useState('20');
+    const [sel, setSel] = useState('20');
+    const [selectedCategory, setSelectedCategory] = useState(0);
+    const [newId, setNewId] = useState(0);
 
     useEffect(() => {
         // Ici, vous pouvez mettre en place la récupération des données pour votre Dropdown, si nécessaire
@@ -27,11 +30,11 @@ const PlatsCreation = ({ navigation }) => {
             description: description,
             quantite: quantite,
             valeur_energetique: valeurEnergetique,
-            matieres_grasses: matieresGrasses,
-            glucides: glucides,
-            proteines: proteines,
+            matiere_grasse: matieresGrasses,
+            glucide: glucides,
+            proteine: proteines,
             sel: sel,
-            categorie: selectedCategory
+            id_categorie: selectedCategory
         };
         console.log('newPlat:', newPlat);
 
@@ -44,11 +47,15 @@ const PlatsCreation = ({ navigation }) => {
         })
         .then(response => response.json())
         .then(data => {
+            setNewId(data.id);
             console.log("Données renvoyées :", data);
+            console.log('id:', newId);
         })
         .catch(error => console.log('Erreur :', error));
 
-        navigation.navigate('PlatsIngredients');
+        
+
+        navigation.navigate('PlatsIngredients' , newId);
     };
 
     return (

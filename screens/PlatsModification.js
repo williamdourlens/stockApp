@@ -80,7 +80,7 @@ const PlatsModification = ({ route, navigation }) => {
         })
         .catch(error => console.log('Erreur :', error));
 
-        navigation.navigate('PlatsModificationIngredient')
+        navigation.navigate('PlatsModificationIngredients')
     }
 
     const handleDeletePlat = () => {
