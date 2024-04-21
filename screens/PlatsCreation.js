@@ -49,7 +49,7 @@ const PlatsCreation = ({ navigation }) => {
         .then(data => {
             setNewId(data.id);
             console.log("Données renvoyées :", data);
-            console.log('id:', newId);
+            console.log('id:', data.id);
         })
         .catch(error => console.log('Erreur :', error));
 
@@ -65,62 +65,62 @@ const PlatsCreation = ({ navigation }) => {
                 <TextInput
                     style={styles.newcateg}
                     placeholder="Nom du plat"
-                    onChangeText={setPlatName}
+                    onChangeText={text => setPlatName(text)}
                     value={platName}
                 />
                 <TextInput
                     style={styles.newcateg}
                     placeholder="Prix"
                     keyboardType="numeric"
-                    onChangeText={setPrix}
+                    onChangeText={text => setPrix(text)}
                     value={prix}
                 />
                 <TextInput
                     style={styles.newcateg}
                     placeholder="Description"
-                    onChangeText={setDescription}
+                    onChangeText={text => setDescription(text)}
                     value={description}
                 />
                 <TextInput
                     style={styles.newcateg}
                     placeholder="Quantité"
                     keyboardType="numeric"
-                    onChangeText={setQuantite}
+                    onChangeText={text => setQuantite(text)}
                     value={quantite}
                 />
                 <TextInput
                     style={styles.newcateg}
                     placeholder="Valeur énergétique"
                     keyboardType="numeric"
-                    onChangeText={setValeurEnergetique}
+                    onChangeText={text => setValeurEnergetique(text)}
                     value={valeurEnergetique}
                 />
                 <TextInput
                     style={styles.newcateg}
                     placeholder="Matières grasses"
                     keyboardType="numeric"
-                    onChangeText={setMatieresGrasses}
+                    onChangeText={text => setMatieresGrasses(text)}
                     value={matieresGrasses}
                 />
                 <TextInput
                     style={styles.newcateg}
                     placeholder="Glucides"
                     keyboardType="numeric"
-                    onChangeText={setGlucides}
+                    onChangeText={text => setGlucides(text)}
                     value={glucides}
                 />
                 <TextInput
                     style={styles.newcateg}
                     placeholder="Protéines"
                     keyboardType="numeric"
-                    onChangeText={setProteines}
+                    onChangeText={text => setProteines(text)}
                     value={proteines}
                 />
                 <TextInput
                     style={styles.newcateg}
                     placeholder="Sel"
                     keyboardType="numeric"
-                    onChangeText={setSel}
+                    onChangeText={text => setSel(text)}
                     value={sel}
                 />
 
