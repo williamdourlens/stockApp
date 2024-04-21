@@ -5,7 +5,7 @@ import ip from '../components/ip'
 const PlatsIngredients = ({ route,navigation }) => {
     const PlatId = route.params;
     const [ingredientIds, setIngredients] = useState([]);
-    const selectedIngredients = [];
+    const [selectedIngredients, setSelectedIngredients] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -22,26 +22,26 @@ const PlatsIngredients = ({ route,navigation }) => {
     
         fetchData();
     }, []);
-    console.log('PlatId:', PlatId);
 
     const buttonClicked = (id) => {
         return () => {
-            console.log('id:', id);
-            const index = selectedIngredients.findIndex(item => item === id);
-            if (index !== -1) {
-                selectedIngredients.splice(index);
-            } else {
-                selectedIngredients.push(id);
-            }
-            console.log('selectedIngredients:', selectedIngredients);
+            setSelectedIngredients(prevState => {
+                const index = prevState.findIndex(item => item === id);
+                if (index !== -1) {
+                    return prevState.filter(item => item !== id);
+                } else {
+                    return [...prevState, id];
+                }
+            });
         };
     }
-    console.log('selectedIngredients:', selectedIngredients);
 
-    const validateIngredients = (selectedIngredients) => {
-        for (const idelt of selectedIngredients) {
-            console.log('idelt:', idelt);
-            console.log('PlatId:', PlatId);
+    const IngredInLst = (id) => {
+        return selectedIngredients.includes(id);
+    };
+
+    const validateIngredients = () => {
+        selectedIngredients.forEach(idelt => {
             const newComposition = {
                 id_plat: PlatId,
                 id_ingredient: idelt,
@@ -60,34 +60,33 @@ const PlatsIngredients = ({ route,navigation }) => {
                 console.log("Données renvoyées :", data);
             })
             .catch(error => console.log('Erreur :', error));
-
-        }
-        // navigation.navigate('Home');
+        });
+        navigation.navigate('Home');
     };
 
+    console.log('selectedIngredients:', selectedIngredients);
 
     return (
         <ScrollView style={styles.container}>
             <Text style={styles.Title}>Ajouter les ingrédients au plat</Text>
             {ingredientIds ? (
                 ingredientIds.map((item) => (
-                    <View style={styles.div2}>                        
+                    <View style={styles.div2} key={item[0]}>                        
                         <TouchableOpacity 
                             style={styles.newcateg} 
-                            key={item[0]}
                             onPress={buttonClicked(item[0])}
                         >
-                            <Text> {item[0]} : {item[1]} </Text>
+                            <Text> {item[0]} : {item[1]} {IngredInLst(item[0]) ? '✅' : '❌'}</Text>
                         </TouchableOpacity>
                     </View>
                 ))
             ) : null}
 
             <View>
-                <Text style={styles.Title}>{selectedIngredients.join(', ')}</Text>
+                
                 <TouchableOpacity 
                     style={styles.button2} 
-                    onPress={() => validateIngredients(selectedIngredients)}
+                    onPress={validateIngredients}
                 >
                     <Text style={styles.buttonText}>Valider les ingrédients</Text>
                 </TouchableOpacity>
@@ -101,18 +100,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#1E1E1E',
     },
-    nameplat: {
-        color: 'black',
-        backgroundColor: '#ECAB03',
-        width: 230,
-        height: 40,
-        fontSize: 20,
-        paddingTop: 5,
-        textAlign: 'center',
-        justifyContent: 'center',
-        marginVertical: 10,
-        borderRadius: 5,
-    },
     Title: {
         marginTop: 40,
         fontSize: 25,
@@ -121,11 +108,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#ECAB03',
         marginHorizontal: 40,
         textAlign: 'center',
-        marginBottom: 20,
-    },
-    div: {
-        flexDirection: 'row',
-        marginLeft: 15,
         marginBottom: 20,
     },
     div2: {
@@ -138,10 +120,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 50,
         borderRadius: 5,
         marginVertical: 15,
-    },
-    buttonText2: {
-        color: '#1E1E1E',
-        fontSize: 10,
     },
     newcateg: {
         color: 'black',

@@ -16,7 +16,7 @@ const PlatsModification = ({ route, navigation }) => {
     const [proteines, setProteines] = useState();
     const [sel, setSel] = useState();
     const [selectCategorie, setIdCategorie] = useState();
-    const [categ, getCateg] = useState([]);
+    const [categ, getCateg] = useState([]); 
 
 
     useEffect(() => {
