@@ -63,7 +63,7 @@ const PlatsModification = ({ route, navigation }) => {
             glucide: glucides,
             proteine: proteines,
             sel: sel,
-            id_categorie: selectCategorie
+            id_categorie: selectCategorie+1
         };
         console.log('newPlat:', newPlat);
 
