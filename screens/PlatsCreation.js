@@ -7,15 +7,15 @@ import { set } from 'firebase/database';
 const PlatsCreation = ({ navigation }) => {
     const [data, getData] = useState(null);
     const [newplatget, setNewPlat] = useState('');
-    const [platName, setPlatName] = useState('wololo');
+    const [platName, setPlatName] = useState('');
     const [prix, setPrix] = useState(20);
-    const [description, setDescription] = useState('zggg');
-    const [quantite, setQuantite] = useState('20');
-    const [valeurEnergetique, setValeurEnergetique] = useState('20');
-    const [matieresGrasses, setMatieresGrasses] = useState('20');
-    const [glucides, setGlucides] = useState('20');
-    const [proteines, setProteines] = useState('20');
-    const [sel, setSel] = useState('20');
+    const [description, setDescription] = useState('');
+    const [quantite, setQuantite] = useState('');
+    const [valeurEnergetique, setValeurEnergetique] = useState('');
+    const [matieresGrasses, setMatieresGrasses] = useState('');
+    const [glucides, setGlucides] = useState('');
+    const [proteines, setProteines] = useState('');
+    const [sel, setSel] = useState('');
     const [selectedCategory, setSelectedCategory] = useState(0);
     const [newId, setNewId] = useState(0);
 
