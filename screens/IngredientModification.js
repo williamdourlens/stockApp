@@ -42,7 +42,7 @@ const IngredientModification = ({ route, navigation }) => {
             nom: ingre.nom,
             quantite: ingredientQuantity,
             isAllergene: isAllergene ? 1 : 0,
-            id_fournisseur: selectedFournisseur
+            id_fournisseur: selectedFournisseur+1
         };
         console.log('newIngredient:', newIngredient);
 
