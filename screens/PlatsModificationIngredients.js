@@ -3,83 +3,115 @@ import { StyleSheet, Text, TouchableOpacity, View, ScrollView } from 'react-nati
 import ip from '../components/ip';
 
 const PlatsModificationIngredients = ({ route, navigation }) => {
-    const { PlatId } = route.params;
-    const [ingredients, setIngredients] = useState([]);
-    const [Composition, getComposition] = useState([]);
+    const PlatId = route.params;
+    const [ingredientIds, setIngredients] = useState([]);
     const [selectedIngredients, setSelectedIngredients] = useState([]);
-    const [idIngredients, getIdIngredients] = useState();
-    const [compositionIdIngredients, getCompositionIdIngredients] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await fetch("http://" + ip + ":8000/ingredient/get");
-                const ingredient = await response.json();
-                console.log('data', ingredient);
-                setIngredients(ingredient);
-                getIdIngredients(ingredient.id);
+                const ingredientsData = await response.json();
+                const ingredientIds = ingredientsData.map(ingredient => [ingredient.id, ingredient.nom]);
+                setIngredients(ingredientIds);
+                console.log('liste des ingredients:', ingredientIds);
             } catch (error) {
                 console.error('Erreur de fetch:', error);
             }
             try {
                 const response = await fetch("http://" + ip + ":8000/composition_plats/get/" + PlatId);
-                const composition = await response.json();
-                console.log('composition', composition);
-                getComposition(composition);
-                getCompositionIdIngredients(composition.idIngredient);
-            } catch (error) {
-                console.error('Erreur de fetch2:', error);
+                const compositionData = await response.json();
+                const selectedIngredients = compositionData.map(composition => composition.idIngredient);
+                setSelectedIngredients(selectedIngredients);
+                console.log('liste des ingrédients sélectionnés:', selectedIngredients);
+            }
+            catch (error) {
+                console.error('Erreur de fetch:', error);
             }
         };
-
+    
         fetchData();
     }, []);
 
-    console.log(ingredients[0].id);
 
-    function verifierPresenceAvecBoucle(nombre, liste) {
-        console.log('nombre', nombre);
-        console.log('liste', liste);
-        for (let i = 0; i < liste.length; i++) {
-            if (liste[i] === nombre) {
-                console.log('liste[i]', liste[i]);
-                console.log('nombre', nombre);
-                return true;
-            }
-        }
-        return false;
+    const IngredInLst = (id) => {
+        return selectedIngredients.includes(id);
+    };
+
+    const validateIngredients = () => {
+        fetch('http://' + ip + ':8000/composition_plats/delete_by_plat/' + PlatId, {
+            method: 'DELETE',
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Données renvoyées :", data);
+        })
+        .catch(error => console.log('Erreur :', error));
+
+
+        selectedIngredients.forEach(idelt => {
+            const newComposition = {
+                id_plat: PlatId,
+                id_ingredient: idelt,
+            };
+        console.log('newComposition:', newComposition);
+        
+        fetch('http://' + ip + ':8000/composition_plats/post', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newComposition),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Données renvoyées :", data);
+        })
+        .catch(error => console.log('Erreur :', error));
+        });
+        navigation.navigate('Home');
+    };
+
+    const buttonClicked = (id) => {
+        return () => {
+            setSelectedIngredients(prevState => {
+                const index = prevState.findIndex(item => item === id);
+                if (index !== -1) {
+                    return prevState.filter(item => item !== id);
+                } else {
+                    return [...prevState, id];
+                }
+            });
+        };
     }
+
+    console.log('selectedIngredients:', selectedIngredients);
 
     return (
         <ScrollView style={styles.container}>
-            <Text style={styles.Title}>Modifier un plat</Text>
-            <View style={styles.div2}>
-                <Text style={styles.Title}>Liste des ingrédients</Text>
+            <Text style={styles.Title}>Ajouter les ingrédients au plat</Text>
+            {ingredientIds ? (
+                ingredientIds.map((item) => (
+                    <View style={styles.div2} key={item[0]}>                        
+                        <TouchableOpacity 
+                            style={styles.newcateg} 
+                            onPress={buttonClicked(item[0])}
+                        >
+                            <Text> {item[0]} : {item[1]} {IngredInLst(item[0]) ? '✅' : '❌'}</Text>
+                        </TouchableOpacity>
+                    </View>
+                ))
+            ) : null}
 
-                {ingredients ? (
-                    ingredients.map((item) => (
-                        <View style={styles.div2}>
-                            <TouchableOpacity style={styles.newcateg} onPress={() => setSelectedIngredients(item.nom)}>
-                                <Text style={styles.nameplat}>
-                                    {item.nom}
-                                </Text>
-                            </TouchableOpacity>
-                            {verifierPresenceAvecBoucle(item.id, compositionIdIngredients) ? 
-                                <Text style={{ color: 'green' }}> ✅</Text>
-                             : 
-                                <Text style={{ color: 'red' }}> ❌</Text>
-                            }
-                        </View>
-                    ))
-                ) : null}
+            <View>
+                
+                <TouchableOpacity 
+                    style={styles.button2} 
+                    onPress={validateIngredients}
+                >
+                    <Text style={styles.buttonText}>Valider les ingrédients</Text>
+                </TouchableOpacity>
             </View>
-
-            <TouchableOpacity style={styles.button2}>
-                <Text style={styles.buttonText2}>Valider</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button2}>
-                <Text style={styles.buttonText2}>Supprimer</Text>
-            </TouchableOpacity>
         </ScrollView>
     );
 }

@@ -80,7 +80,7 @@ const PlatsModification = ({ route, navigation }) => {
         })
         .catch(error => console.log('Erreur :', error));
 
-        navigation.navigate('PlatsModificationIngredients')
+        navigation.navigate('PlatsModificationIngredients', PlatId)
     }
 
     const handleDeletePlat = () => {
@@ -103,7 +103,7 @@ const PlatsModification = ({ route, navigation }) => {
                 <TextInput
                     style={styles.newcateg}
                     value={platName}
-                    onChangeText={(text) => setPlatNom({ ...plat, nom: text })}
+                    onChangeText={text => setPlatNom(text)}
                 />
 
                 <View style={styles.divhozi}>
@@ -216,13 +216,13 @@ const PlatsModification = ({ route, navigation }) => {
                     <TextInput
                     style={styles.bigdescription}
                     value={description}
-                    onChangeText={text => setDescription({ ...plat, description: text })}
+                    onChangeText={text => setDescription(text)}
                 />
                 </View>
 
             </View>
 
-            <TouchableOpacity style={styles.button2}>
+            <TouchableOpacity style={styles.button2} onPress={handleUpdatePlat}>
                 <Text style={styles.buttonText2}>Valider</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button2} onPress={handleDeletePlat}>
